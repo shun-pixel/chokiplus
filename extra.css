@@ -1,0 +1,42 @@
+/* 静的版で追加した動き（元サイトの framer-motion 相当） */
+html { scroll-behavior: smooth; }
+
+.loader { transition: opacity .45s ease; }
+.loader.is-leaving { opacity: 0; pointer-events: none; }
+
+/* ヒーローの登場 */
+.hero-copy, .hero-visual>img, .hero-shape { transition: opacity .9s ease .15s, transform 1s cubic-bezier(.22,1,.36,1) .55s; }
+.is-loading .hero-copy, .is-loading .hero-shape { opacity: 0; }
+.is-loading .hero-visual>img { opacity: 0; transform: translateY(50px); }
+
+/* ヒーロー帯の切替 */
+.hero-band { transition: opacity .5s ease, transform .5s ease; }
+.hero-band.is-out { opacity: 0; transform: translateX(-50px); }
+.hero-band.is-in { opacity: 0; transform: translateX(80px); transition: none; }
+
+/* メニュー */
+.menu-overlay { opacity: 0; visibility: hidden; transition: opacity .35s ease, visibility 0s linear .48s; }
+.menu-overlay .menu-panel { transform: translateX(100%); transition: transform .48s cubic-bezier(.77,0,.175,1); }
+.menu-overlay.is-open { opacity: 1; visibility: visible; transition: opacity .35s ease; }
+.menu-overlay.is-open .menu-panel { transform: none; }
+
+/* FAQ */
+.faq-answer { height: 0; opacity: 0; transition: height .28s ease, opacity .28s ease; }
+.faq-item.is-open .faq-answer { opacity: 1; }
+
+/* デモ送信トースト */
+.demo-toast {
+  position: fixed; left: 50%; bottom: 24px; z-index: 9999;
+  transform: translate(-50%, 20px); opacity: 0;
+  width: min(380px, calc(100% - 32px));
+  background: #fff; color: #191c19; border-radius: 10px;
+  box-shadow: 0 10px 30px rgba(0,0,0,.15); padding: 14px 18px;
+  display: flex; flex-direction: column; gap: 4px; font-size: .85rem;
+  transition: opacity .3s ease, transform .3s ease;
+}
+.demo-toast span { color: #666; font-size: .78rem; }
+.demo-toast.is-show { opacity: 1; transform: translate(-50%, 0); }
+
+@media (prefers-reduced-motion: reduce) {
+  [data-reveal] { opacity: 1 !important; transform: none !important; }
+}
